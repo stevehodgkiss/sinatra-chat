@@ -3,7 +3,7 @@ require 'slim'
 
 class App < Sinatra::Base
   set :public, File.dirname(__FILE__) + '/public'
-  enable :sessions
+  use Rack::Session::Cookie, :key => "sinatra-chat", :secret => "changeme"
   
   helpers do
     def current_user
@@ -12,7 +12,12 @@ class App < Sinatra::Base
   end
   
   get "/" do
+    redirect "/sign_in" unless current_user
     slim :homepage
+  end
+  
+  get "/sign_in" do
+    slim :sign_in
   end
   
   post "/sign_in" do
