@@ -13,7 +13,7 @@ Feature: Identity
     And I should see "Sign out"
   
   Scenario: Sign out
-    Given I have signed in as "Steve"
+    Given I am signed in as "Steve"
     When I follow "Sign out"
     Then I should see "Sign in"
     And I should not see "Steve"
